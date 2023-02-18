@@ -224,7 +224,7 @@ extension TipsyViewController {
             ],
             axis: .horizontal,
             spacing: 5,
-            distribution: .fillProportionally
+            distribution: .fillEqually
         )
         view.addSubview(buttonStackView)
         
