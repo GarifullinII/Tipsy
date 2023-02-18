@@ -13,18 +13,10 @@ final class TipsyViewController: UIViewController {
     
     var billTotalStackView = UIStackView()
     
-    private let billTotalView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
-    
     private let billTotalLabel: UILabel = {
         let label = UILabel()
         label.text = "Enter bill total"
-        label.textColor = .black
+        label.textColor = .systemGray
         label.font = UIFont.systemFont(ofSize: 25)
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -36,7 +28,7 @@ final class TipsyViewController: UIViewController {
         let textField = UITextField()
         textField.placeholder = "Enter bill total"
         textField.setContentHuggingPriority(UILayoutPriority(390), for: .horizontal)
-        textField.backgroundColor = .white
+        textField.backgroundColor = .clear
         textField.font = UIFont.systemFont(ofSize: 40)
         textField.textAlignment = .center
         textField.textColor = .black
@@ -47,12 +39,20 @@ final class TipsyViewController: UIViewController {
         return textField
     }()
     
+    private let calculateView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGreen
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     //MARK: - life cycle funcs
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .orange
+        view.backgroundColor = .white
         
         setupViews()
         setConstraints()
@@ -68,18 +68,19 @@ final class TipsyViewController: UIViewController {
 extension TipsyViewController {
     
     private func setupViews() {
-        view.addSubview(billTotalView)
-        
         billTotalStackView = UIStackView(
             arrangedSubviews: [
                 billTotalLabel,
                 billTotalTextField
             ],
             axis: .vertical,
-            spacing: 10
+            spacing: 20,
+            distribution: .fillProportionally
         )
         
-        billTotalView.addSubview(billTotalStackView)
+        view.addSubview(billTotalStackView)
+        
+        view.addSubview(calculateView)
     }
 }
 
@@ -88,23 +89,19 @@ extension TipsyViewController {
 extension TipsyViewController {
     
     private func setConstraints() {
-        
         NSLayoutConstraint.activate([
-            billTotalView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            billTotalView.topAnchor.constraint(equalTo: view.topAnchor),
-            billTotalView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            billTotalView.heightAnchor.constraint(equalToConstant: 205)
+            billTotalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            billTotalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            billTotalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            billTotalStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
         ])
         
         NSLayoutConstraint.activate([
-            billTotalLabel.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        
-        NSLayoutConstraint.activate([
-            billTotalStackView.leadingAnchor.constraint(equalTo: billTotalView.leadingAnchor),
-            billTotalStackView.topAnchor.constraint(equalTo: billTotalView.safeAreaLayoutGuide.topAnchor, constant: 10),
-            billTotalStackView.trailingAnchor.constraint(equalTo: billTotalView.trailingAnchor),
-            billTotalStackView.bottomAnchor.constraint(equalTo: billTotalView.bottomAnchor, constant: 40)
+            calculateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            calculateView.topAnchor.constraint(equalTo: billTotalStackView.bottomAnchor, constant: 40),
+            calculateView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            calculateView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+//            calculateView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.9)
         ])
     }
 }
