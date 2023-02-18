@@ -12,6 +12,7 @@
 		6EAE873D29A0FC7200B4721F /* TipsyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAE873C29A0FC7200B4721F /* TipsyViewController.swift */; };
 		6EAE874229A0FC7500B4721F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EAE874129A0FC7500B4721F /* Assets.xcassets */; };
 		6EAE874529A0FC7500B4721F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EAE874329A0FC7500B4721F /* LaunchScreen.storyboard */; };
+		6EAE875429A1049600B4721F /* UIStackView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAE875329A1049600B4721F /* UIStackView + Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		6EAE874129A0FC7500B4721F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6EAE874429A0FC7500B4721F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6EAE874629A0FC7500B4721F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EAE875329A1049600B4721F /* UIStackView + Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				6EAE874D29A0FDCB00B4721F /* Models */,
 				6EAE874F29A0FE0600B4721F /* Views */,
 				6EAE874E29A0FDD400B4721F /* Controllers */,
+				6EAE875129A1047200B4721F /* Extensions */,
 				6EAE875029A0FE7200B4721F /* Resources */,
 			);
 			path = Tipsy;
@@ -102,6 +105,22 @@
 				6EAE874629A0FC7500B4721F /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6EAE875129A1047200B4721F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6EAE875229A1048800B4721F /* UIKit */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6EAE875229A1048800B4721F /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				6EAE875329A1049600B4721F /* UIStackView + Extensions.swift */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +196,7 @@
 				6EAE873D29A0FC7200B4721F /* TipsyViewController.swift in Sources */,
 				6EAE873929A0FC7200B4721F /* AppDelegate.swift in Sources */,
 				6EAE873B29A0FC7200B4721F /* SceneDelegate.swift in Sources */,
+				6EAE875429A1049600B4721F /* UIStackView + Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
