@@ -196,7 +196,7 @@ final class TipsyViewController: UIViewController {
             sender.layer.cornerRadius = 10
         }
     }
-    
+
     //MARK: - public
 }
 
