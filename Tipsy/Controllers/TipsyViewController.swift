@@ -175,6 +175,8 @@ final class TipsyViewController: UIViewController {
         // choose ResultViewController
         let secondVC = ResultViewController()
         secondVC.resultTotal = result
+        secondVC.resultPercent = String(percent)
+        secondVC.resultStepperValue = String(stepperValue)
         present(secondVC, animated: true)
     }
     

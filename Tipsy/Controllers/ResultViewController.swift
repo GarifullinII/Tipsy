@@ -12,6 +12,8 @@ final class ResultViewController: UIViewController {
     //MARK: - let/var
     
     var resultTotal = "0.0"
+    var resultPercent = ""
+    var resultStepperValue = ""
     
     private let totalView: UIView = {
         let view = UIView()
@@ -94,9 +96,15 @@ extension ResultViewController {
         view.addSubview(totalView)
         
         totalView.addSubview(totalLabel)
+        
         totalView.addSubview(resultTotalLabel)
         
+        resultTotalLabel.text = resultTotal
+        
         view.addSubview(splitLabel)
+        
+        splitLabel.text = "Split between \(resultStepperValue) people, with \(resultPercent)% tip."
+        
         view.addSubview(recalculateButton)
     }
 }
