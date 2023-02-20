@@ -11,7 +11,7 @@ final class TipsyViewController: UIViewController {
     
     //MARK: - let/var
     
-    var buttonIsActive: Bool = false
+    var buttons = [UIButton]()
     
     var billTotalStackView = UIStackView()
     
@@ -64,39 +64,6 @@ final class TipsyViewController: UIViewController {
     
     var buttonStackView = UIStackView()
     
-    private let selectOneButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("0%", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 35)
-        button.tintColor = .systemGreen
-        button.addTarget(self, action: #selector(selectOneButtonTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-
-        return button
-    }()
-    
-    private let selectTenButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("10%", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 35)
-        button.tintColor = .systemGreen
-        button.addTarget(self, action: #selector(selectTenButtonTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-
-        return button
-    }()
-    
-    private let selectTwentyButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("20%", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 35)
-        button.tintColor = .systemGreen
-        button.addTarget(self, action: #selector(selectTwentyButtonTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-
-        return button
-    }()
-    
     private let chooseLabel: UILabel = {
         let label = UILabel()
         label.text = "Choose Split"
@@ -123,8 +90,8 @@ final class TipsyViewController: UIViewController {
     
     private let stepper: UIStepper = {
         let stepper = UIStepper()
-        stepper.minimumValue = 0
-        stepper.maximumValue = 100
+        stepper.minimumValue = 1
+        stepper.maximumValue = 10
         stepper.stepValue = 1
         stepper.addTarget(self, action:  #selector(stepperValueChanged), for: .valueChanged)
         stepper.translatesAutoresizingMaskIntoConstraints = false
@@ -140,7 +107,7 @@ final class TipsyViewController: UIViewController {
         button.tintColor = .white
         button.addTarget(self, action: #selector(calculateButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return button
     }()
     
@@ -157,46 +124,42 @@ final class TipsyViewController: UIViewController {
     
     //MARK: - flow funcs
     
-    @objc private func selectOneButtonTapped() {
-        changeBabackgroundColor(selectOneButton)
-        
-        buttonIsActive = !buttonIsActive
-        print("selectOneButtonTapped")
+    private func setupButtons() {
+        for i in 0..<3 {
+            let button = UIButton(type: .system)
+            button.setTitle("\(i * 10)%", for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 35)
+            button.tintColor = .systemGreen
+            button.backgroundColor = .clear
+            button.layer.cornerRadius = 10
+            button.tag = i
+            button.addTarget(self, action: #selector(tipChanged), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            buttons.append(button)
+        }
     }
     
-    @objc private func selectTenButtonTapped() {
-        changeBabackgroundColor(selectTenButton)
-        
-        buttonIsActive = !buttonIsActive
-        print("selectTenButtonTapped")
+    @objc private func tipChanged() {
     }
-    
-    @objc private func selectTwentyButtonTapped() {
-        changeBabackgroundColor(selectTwentyButton)
-        
-        buttonIsActive = !buttonIsActive
-        print("selectTwentyButtonTapped")
-    }
-    
+
     @objc private func stepperValueChanged() {
-        print("stepperValueChanged")
     }
     
     @objc private func calculateButtonTapped() {
-        print("calculateButtonTapped")
     }
     
-    private func changeBabackgroundColor(_ sender: UIButton) {
-        if buttonIsActive {
-            sender.backgroundColor = .clear
-            sender.tintColor = .systemGreen
-        } else {
-            sender.backgroundColor = .systemGreen
-            sender.tintColor = .white
-            sender.layer.cornerRadius = 10
-        }
-    }
-
+//    private func changeBabackgroundColor(_ sender: UIButton) {
+//        if sender.isSelected != true {
+//            sender.backgroundColor = .systemGreen
+//            sender.tintColor = .white
+//            sender.layer.cornerRadius = 10
+//        } else {
+//            sender.backgroundColor = .clear
+//            sender.tintColor = .systemGreen
+//        }
+//    }
+//    stepperLabel.text = String(format: "%.0f", stepper.value)
+    
     //MARK: - public
 }
 
@@ -216,12 +179,10 @@ extension TipsyViewController {
         )
         view.addSubview(billTotalStackView)
         
+        setupButtons()
+        
         buttonStackView = UIStackView(
-            arrangedSubviews: [
-                selectOneButton,
-                selectTenButton,
-                selectTwentyButton
-            ],
+            arrangedSubviews: buttons,
             axis: .horizontal,
             spacing: 5,
             distribution: .fillEqually

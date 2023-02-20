@@ -79,7 +79,7 @@ final class ResultViewController: UIViewController {
     //MARK: - flow funcs
     
     @objc private func recalculateButtonTapped() {
-        print("recalculateButtonTapped")
+        dismiss(animated: true)
     }
 
     //MARK: - public
