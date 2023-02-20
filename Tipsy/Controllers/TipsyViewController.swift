@@ -13,6 +13,12 @@ final class TipsyViewController: UIViewController {
     
     var buttons = [UIButton]()
     
+    var selectedTip: Int? {
+        didSet {
+            calculateButton.isEnabled = selectedTip != nil
+        }
+    }
+    
     var billTotalStackView = UIStackView()
     
     private let billTotalLabel: UILabel = {
@@ -139,28 +145,62 @@ final class TipsyViewController: UIViewController {
         }
     }
     
-    @objc private func tipChanged() {
+    @objc private func tipChanged(_ sender: UIButton) {
+        billTotalTextField.endEditing(true)
+        selectedTip = sender.tag
+        updateTips()
     }
 
     @objc private func stepperValueChanged() {
+        stepperLabel.text = String(format: "%.0f", stepper.value)
     }
     
-    @objc private func calculateButtonTapped() {
+    @objc private func calculateButtonTapped(_ sender: UIButton) {
+        // choose split
+        let stepperValue = Int(stepper.value)
+        
+        // select tip (percent)
+        let percent = percent()
+
+        // get bill total
+        var textValue: Double
+        guard let textField = billTotalTextField.text else {
+            return
+        }
+        textValue = Double(textField) ?? 0.0
+        
+        // calculate result
+        let result = String(format: "%.2f", (textValue + (textValue * percent)) / Double(stepperValue))
+        print(result)
+        
+        let secondVC = ResultViewController()
+        present(secondVC, animated: true)
     }
-    
-//    private func changeBabackgroundColor(_ sender: UIButton) {
-//        if sender.isSelected != true {
-//            sender.backgroundColor = .systemGreen
-//            sender.tintColor = .white
-//            sender.layer.cornerRadius = 10
-//        } else {
-//            sender.backgroundColor = .clear
-//            sender.tintColor = .systemGreen
-//        }
-//    }
-//    stepperLabel.text = String(format: "%.0f", stepper.value)
     
     //MARK: - public
+    
+    func updateTips() {
+        for i in 0..<buttons.count {
+            buttons[i].isSelected = i == selectedTip
+        }
+    }
+    
+    func percent() -> Double {
+        var percent: Double = 0.0
+        
+        switch selectedTip {
+        case 0:
+            percent = 0
+        case 1:
+            percent = 0.1
+        case 2:
+            percent = 0.2
+        default:
+            break
+        }
+        
+        return percent
+    }
 }
 
 //MARK: - extensions setupViews
