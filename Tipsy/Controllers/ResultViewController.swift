@@ -11,6 +11,8 @@ final class ResultViewController: UIViewController {
     
     //MARK: - let/var
     
+    var resultTotal = "0.0"
+    
     private let totalView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGreen
@@ -86,7 +88,6 @@ final class ResultViewController: UIViewController {
 }
 
 //MARK: - extensions setupViews
-
 extension ResultViewController {
     
     private func setupViews() {
@@ -101,7 +102,6 @@ extension ResultViewController {
 }
 
 //MARK: - extensions setConstraints
-
 extension ResultViewController {
     
     private func setConstraints() {
@@ -141,4 +141,3 @@ extension ResultViewController {
         ])
     }
 }
-
