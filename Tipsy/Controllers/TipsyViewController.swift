@@ -13,6 +13,8 @@ final class TipsyViewController: UIViewController {
     
     var buttons = [UIButton]()
     
+    var tipsyBrain = TipsyBrain()
+    
     var selectedTip: Int? {
         didSet {
             calculateButton.isEnabled = selectedTip != nil
@@ -156,27 +158,30 @@ final class TipsyViewController: UIViewController {
     }
     
     @objc private func calculateButtonTapped(_ sender: UIButton) {
-        // choose split
-        let stepperValue = Int(stepper.value)
-        
-        // select tip (percent)
-        let percent = percent()
-
         // get bill total
-        var textValue: Double
+        var textFieldValue: Double
         guard let textField = billTotalTextField.text else {
             return
         }
-        textValue = Double(textField) ?? 0.0
+        textFieldValue = Double(textField) ?? 0.0
         
-        // calculate result
-        let result = String(format: "%.2f", (textValue + (textValue * percent)) / Double(stepperValue))
+        // select tip (percent)
+        let percentValue = Double(percent())
+        
+        // choose split
+        let stepperValue = Double(stepper.value)
+
+
+//        // calculate result
+//        let result = String(format: "%.2f", (textValue + (textValue * percent)) / Double(stepperValue))
+        
+        tipsyBrain.calculateTipsy(textFieldValue: textFieldValue, percentValue: percentValue, stepperValue: stepperValue)
         
         // choose ResultViewController
         let secondVC = ResultViewController()
-        secondVC.resultTotal = result
-        secondVC.resultPercent = String(percent)
-        secondVC.resultStepperValue = String(stepperValue)
+        secondVC.resultTotal = tipsyBrain.getValue()
+//        secondVC.resultPercent = String(percent)
+//        secondVC.resultStepperValue = String(stepperValue)
         present(secondVC, animated: true)
     }
     
