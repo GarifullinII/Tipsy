@@ -20,6 +20,4 @@ struct TipsyBrain {
     mutating func calculateTipsy(textFieldValue: Double, percentValue: Double, stepperValue: Double) {
         tipsy = (textFieldValue + (textFieldValue * percentValue)) / stepperValue
     }
-    
-    
 }

@@ -170,9 +170,7 @@ final class TipsyViewController: UIViewController {
         
         // choose split
         let stepperValue = Double(stepper.value)
-
-
-  
+        
         tipsyBrain.calculateTipsy(textFieldValue: textFieldValue, percentValue: percentValue, stepperValue: stepperValue)
         
         // choose ResultViewController
