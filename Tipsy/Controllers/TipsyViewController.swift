@@ -172,16 +172,14 @@ final class TipsyViewController: UIViewController {
         let stepperValue = Double(stepper.value)
 
 
-//        // calculate result
-//        let result = String(format: "%.2f", (textValue + (textValue * percent)) / Double(stepperValue))
-        
+  
         tipsyBrain.calculateTipsy(textFieldValue: textFieldValue, percentValue: percentValue, stepperValue: stepperValue)
         
         // choose ResultViewController
         let secondVC = ResultViewController()
         secondVC.resultTotal = tipsyBrain.getValue()
-//        secondVC.resultPercent = String(percent)
-//        secondVC.resultStepperValue = String(stepperValue)
+        secondVC.resultPercent = String(percentValue)
+        secondVC.resultStepperValue = String(stepperValue)
         present(secondVC, animated: true)
     }
     

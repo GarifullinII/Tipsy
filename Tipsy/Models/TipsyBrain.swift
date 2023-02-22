@@ -9,10 +9,10 @@ import Foundation
 
 struct TipsyBrain {
     
-    var tipsy: Double = 0
+    var tipsy: Double?
    
     func getValue() -> String {
-        let tipsyString = String(format: "%.2f", tipsy)
+        let tipsyString = String(format: "%.2f", tipsy ?? 0.0)
         
         return tipsyString
     }
@@ -20,4 +20,6 @@ struct TipsyBrain {
     mutating func calculateTipsy(textFieldValue: Double, percentValue: Double, stepperValue: Double) {
         tipsy = (textFieldValue + (textFieldValue * percentValue)) / stepperValue
     }
+    
+    
 }
